@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Barimt Green Menu</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .app {
+      width: 390px;
+      height: 844px;
+      background: #f2f2f7;
+      border-radius: 40px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .page {
+      height: 100%;
+      overflow-y: auto;
+      padding-bottom: 110px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #3d63ff, #6d86ff);
+      color: white;
+      padding: 30px 20px 50px;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+    }
+
+    .green-header {
+      background: linear-gradient(135deg, #1f8f4d, #63d98a);
+      color: white;
+      padding: 30px 20px 40px;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+    }
+
+    .card {
+      background: white;
+      margin: 16px;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .menu {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 0 16px;
+    }
+
+    .menu-item {
+      min-width: 120px;
+      height: 120px;
+      background: white;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.04);
+      text-align: center;
+    }
+
+    .green-card {
+      background: #e8f8ec;
+      border-left: 5px solid #20b15a;
+    }
+
+    .hero-green {
+      background: linear-gradient(135deg, #daf8e4, #eefcf2);
+    }
+
+    button, .link-btn {
+      border: none;
+      border-radius: 14px;
+      padding: 12px 18px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .green-button {
+      background: #20b15a;
+      color: white;
+    }
+
+    .soft-green-button {
+      background: #eef8ef;
+      color: #18864a;
+      font-weight: bold;
+    }
+
+    .white-btn {
+      background: rgba(255,255,255,0.9);
+      color: #1d6b3a;
+    }
+
+    .outline-btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.5);
+      color: white;
+    }
+
+    .progress-wrap {
+      margin-top: 12px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: #dff3e6;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #20b15a;
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #eef8ef;
+      color: #18864a;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+      margin: 4px 6px 0 0;
+    }
+
+    .bottom {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 86px;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.06);
+      z-index: 30;
+    }
+
+    .nav-btn {
+      font-size: 24px;
+      cursor: pointer;
+      user-select: none;
+      color: #6c7480;
+    }
+
+    .green-nav-btn {
+      background: white;
+      color: #28c76f;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 3px solid #28c76f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: -18px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+      font-size: 22px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .plus {
+      background: #3d63ff;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-top: -30px;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 8px 18px rgba(61, 99, 255, 0.3);
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .stat-box {
+      background: #fff;
+      border-radius: 18px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: inset 0 0 0 1px #f1f1f1;
+    }
+
+    .small {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .big-score {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .tree-stage {
+      font-size: 40px;
+      margin: 10px 0;
+    }
+
+    .stat-number {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .mt-12 {
+      margin-top: 12px;
+    }
+
+    .eco-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .eco-box {
+      background: #f6faf7;
+      border: 1px solid #e1efe5;
+      border-radius: 16px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .eco-box .big {
+      font-size: 22px;
+      font-weight: bold;
+      color: #1f8f4d;
+    }
+
+    .forest-page {
+      min-height: 100%;
+      background:
+        linear-gradient(rgba(12, 47, 20, 0.32), rgba(12, 47, 20, 0.54)),
+        url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      padding: 18px 16px 120px;
+      color: white;
+    }
+
+    .scene-page {
+      min-height: 100%;
+      background:
+        linear-gradient(rgba(20, 40, 30, 0.35), rgba(20, 30, 25, 0.45)),
+        url('https://images.unsplash.com/photo-1547036967-23d11aacaee0?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      color: white;
+      padding: 24px 18px 120px;
+      text-align: center;
+    }
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .top-title {
+      font-weight: bold;
+    }
+
+    .circle-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .glass-card {
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 24px;
+      padding: 16px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.16);
+    }
+
+    .forest-hero h2 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+
+    .forest-hero p {
+      margin: 0;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.4;
+      font-size: 14px;
+    }
+
+    .main-tree {
+      text-align: center;
+      margin: 18px 0 10px;
+      font-size: 84px;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25));
+    }
+
+    .tree-status {
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .tree-status h3 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .tree-status p {
+      margin: 6px 0 0;
+      color: rgba(255,255,255,0.92);
+      font-size: 14px;
+    }
+
+    .price-label {
+      font-weight: bold;
+      color: #d8ffd8 !important;
+    }
+
+    .action-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .action-row button,
+    .action-row a {
+      flex: 1;
+      font-weight: bold;
+    }
+
+    .section-title {
+      margin: 18px 2px 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .tree-list {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .tree-option {
+      min-width: 170px;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.22);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 12px;
+      color: white;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .tree-option.active {
+      outline: 2px solid #c4ff9a;
+      background: rgba(169, 255, 184, 0.18);
+    }
+
+    .tree-option .emoji {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+
+    .tree-option .name {
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .tree-option .price {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      margin: 6px 0;
+    }
+
+    .tree-option .desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.35;
+    }
+
+    .reward-card {
+      margin-top: 16px;
+      background: rgba(255,255,255,0.14);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.14);
+    }
+
+    .reward-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.94);
+    }
+
+    .plant-summary {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .mini-stat {
+      background: rgba(255,255,255,0.14);
+      border-radius: 16px;
+      padding: 12px;
+      text-align: center;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .mini-stat .big {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .mongolia-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      margin-bottom: 16px;
+    }
+
+    .mongolia-map.real-map {
+      width: 100%;
+      max-width: 720px;
+      height: 360px;
+      position: relative;
+      background: transparent;
+      box-shadow: none;
+      border: none;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    .map-shape {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.16));
+      padding: 18px;
+      opacity: 0.95;
+      pointer-events: none;
+    }
+
+    .map-trees-layer {
+      position: absolute;
+      inset: 0;
+    }
+
+    .map-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.92);
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    .map-tree {
+      width: 18px;
+      height: 18px;
+      background: #2f9d71;
+      border-radius: 50%;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 0 8px rgba(47,157,113,0.24);
+      border: 3px solid rgba(255,255,255,0.7);
+      z-index: 2;
+    }
+
+    .scene-card {
+      margin-top: 20px;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+
+    .scene-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .scene-sub {
+      color: rgba(255,255,255,0.92);
+      font-size: 14px;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .scene-badge {
+      margin-top: 18px;
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    .survey-page {
+      background: #f7f8fb;
+    }
+
+    .survey-wrap {
+      padding: 16px;
+    }
+
+    .survey-link-card {
+      background: white;
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      text-align: center;
+    }
+
+    .survey-link-card h3 {
+      margin-top: 0;
+    }
+
+    .survey-link-card p {
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .survey-link-btn {
+      background: #20b15a;
+      color: white;
+      width: 100%;
+      margin-top: 14px;
+      font-weight: bold;
+    }
+
+    .survey-note {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #777;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 50;
+      padding: 20px;
+    }
+
+    .popup {
+      width: 100%;
+      max-width: 320px;
+      background: linear-gradient(180deg, #f8fff7, #ebf9ee);
+      border-radius: 28px;
+      padding: 22px 20px 20px;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.22);
+      text-align: center;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #f0f0f0;
+      color: #444;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .mascot {
+      width: 110px;
+      height: 130px;
+      margin: 8px auto 14px;
+      position: relative;
+    }
+
+    .mascot-head {
+      width: 90px;
+      height: 90px;
+      background: #b5de55;
+      border-radius: 48% 48% 45% 45%;
+      position: absolute;
+      left: 10px;
+      top: 0;
+      border: 4px solid #6a8120;
+    }
+
+    .mascot-body {
+      width: 70px;
+      height: 48px;
+      background: #b5de55;
+      border-radius: 0 0 25px 25px;
+      position: absolute;
+      left: 20px;
+      top: 74px;
+      border: 4px solid #6a8120;
+      border-top: none;
+    }
+
+    .eye {
+      width: 12px;
+      height: 16px;
+      background: #1d1d1d;
+      border-radius: 50%;
+      position: absolute;
+      top: 34px;
+    }
+
+    .eye.left { left: 30px; }
+    .eye.right { right: 30px; }
+
+    .blush {
+      width: 16px;
+      height: 10px;
+      background: rgba(255, 170, 120, 0.55);
+      border-radius: 50%;
+      position: absolute;
+      top: 51px;
+    }
+
+    .blush.left { left: 18px; }
+    .blush.right { right: 18px; }
+
+    .mouth {
+      width: 22px;
+      height: 10px;
+      border-bottom: 4px solid #3d3d3d;
+      border-radius: 0 0 20px 20px;
+      position: absolute;
+      left: 34px;
+      top: 52px;
+    }
+
+    .leaf-top {
+      position: absolute;
+      width: 14px;
+      height: 34px;
+      background: #78b52b;
+      left: 48px;
+      top: -18px;
+      border-radius: 999px;
+    }
+
+    .leaf-top::before,
+    .leaf-top::after {
+      content: "";
+      position: absolute;
+      width: 22px;
+      height: 30px;
+      background: #a4cf39;
+      border: 3px solid #6a8120;
+      border-radius: 50%;
+      top: -12px;
+    }
+
+    .leaf-top::before {
+      left: -18px;
+      transform: rotate(-30deg);
+    }
+
+    .leaf-top::after {
+      right: -18px;
+      transform: rotate(30deg);
+    }
+
+    .popup h3 {
+      margin: 0 0 8px;
+      color: #145c31;
+      font-size: 22px;
+    }
+
+    .popup p {
+      margin: 0;
+      color: #4c5b4f;
+      line-height: 1.45;
+      font-size: 14px;
+    }
+
+    .popup .green-button {
+      margin-top: 16px;
+      width: 100%;
+      font-weight: bold;
+    }
+
+    .billion-card {
+      background: linear-gradient(135deg, #0f8f47, #63d98a);
+      color: white;
+    }
+
+    .billion-card p {
+      color: rgba(255,255,255,0.95);
+      line-height: 1.5;
+    }
+
+    .billion-highlight {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .home-tip {
+      font-size: 13px;
+      color: #4f9c65;
+      margin-top: 8px;
+    }
+
+    .dashboard-card {
+      margin-top: 16px;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .dashboard-box {
+      background: rgba(255,255,255,0.14);
+      border-radius: 18px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .dashboard-number {
+      font-size: 26px;
+      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .dashboard-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .map-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .map-title-block h3 {
+      margin: 0;
+      font-size: 22px;
+      color: white;
+      letter-spacing: 0.5px;
+    }
+
+    .map-title-block p {
+      margin: 6px 0 0;
+      font-size: 13px;
+      color: rgba(255,255,255,0.88);
+    }
+
+    .dashboard-link-btn {
+      background: rgba(255,255,255,0.16);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.24);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: bold;
+      box-shadow: none;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+
+    <div id="welcomePopup" class="overlay">
+      <div class="popup">
+        <div class="close-btn" onclick="closePopup()">✕</div>
+
+        <div class="mascot">
+          <div class="leaf-top"></div>
+          <div class="mascot-head">
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+            <div class="blush left"></div>
+            <div class="blush right"></div>
+            <div class="mouth"></div>
+          </div>
+          <div class="mascot-body"></div>
+        </div>
+
+        <h3>Ногоон баатар болоход дөхөж байна 🌱</h3>
+        <p id="popupText">
+          Та одоогоор 100 eco онооноос 100 оноо дутуу байна.
+        </p>
+        <button class="green-button" onclick="closePopup()">Эхлэх</button>
+      </div>
+    </div>
+
+    <div id="homePage" class="page">
+      <div class="header">
+        <h2>Хэрэглэгчийн мэдээлэл</h2>
+        <p>ТТД: **********</p>
+      </div>
+
+      <div class="card">
+        <h3>Буцаан олголт: ******</h3>
+        <p>Хүлээгдэж буй: 0</p>
+      </div>
+
+      <div class="menu">
+        <div class="menu-item">❤️<br>Эрүүл мэнд</div>
+        <div class="menu-item">🎲<br>Сугалаа</div>
+        <div class="menu-item">💰<br>Буцаан</div>
+      </div>
+
+      <div class="card green-card hero-green">
+        <h3>🌱 Ногоон цэс</h3>
+        <p>Баримт бүртгүүлээд ногоон оноо цуглуул!</p>
+        <button class="green-button" onclick="showGreenPage()">Ногоон цэс рүү орох</button>
+        <p id="pointHome" class="home-tip">Оноо: 0</p>
+      </div>
+    </div>
+
+    <div id="greenPage" class="page hidden">
+      <div class="green-header">
+        <h2>🌱 Ногоон цэс</h2>
+        <p>Таны байгальд ээлтэй үйлдлүүд</p>
+      </div>
+
+      <div class="card">
+        <h3>Eco оноо</h3>
+        <p id="pointGreen" class="big-score">0</p>
+
+        <div class="eco-actions">
+          <div class="eco-box">
+            <div class="big" id="stepCount">0</div>
+            <div class="small">Step</div>
+            <button class="soft-green-button" onclick="addPoint('step')">+10 оноо</button>
+          </div>
+          <div class="eco-box">
+            <div class="big" id="productCount">0</div>
+            <div class="small">Eco product</div>
+            <button class="soft-green-button" onclick="addPoint('product')">+15 оноо</button>
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <p class="small">Ногоон баатар badge хүртэл</p>
+          <div class="progress-bar">
+            <div id="progressFill" class="progress-fill"></div>
+          </div>
+          <p id="progressText" class="small">0 / 100</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🌳 Таны мод</h3>
+        <p id="treeStage" class="tree-stage">🌱</p>
+        <p id="treeText">Үр суулгасан</p>
+        <button class="green-button mt-12" onclick="showPlantPage()">Мод тарих</button>
+      </div>
+
+      <div class="card billion-card">
+        <h3>🇲🇳 Тэрбум мод</h3>
+        <p>
+          Таны тарьсан виртуал мод бүр нь байгаль орчны эерэг оролцоог илэрхийлнэ.
+          “Тэрбум мод” үндэсний хөдөлгөөнийг дэмжих дижитал оролцооны prototype юм.
+        </p>
+        <div class="billion-highlight">
+          Нийт тарьсан виртуал мод: <strong id="billionTreeCount">0</strong>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Амжилтын badge</h3>
+        <div id="badgeList">
+          <span class="badge">Эхлэл</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Товч статистик</h3>
+        <div class="stat-grid">
+          <div class="stat-box">
+            <div id="treeCount" class="stat-number">0</div>
+            <div class="small">Тарьсан мод</div>
+          </div>
+          <div class="stat-box">
+            <div id="actionCount" class="stat-number">0</div>
+            <div class="small">Ногоон үйлдэл</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card green-card">
+        <h3>📋 Асуулга</h3>
+        <p>Ногоон цэстэй холбоотой санал асуулгад оролцоно уу.</p>
+        <button class="green-button" onclick="showSurveyPage()">Асуулга бөглөх</button>
+      </div>
+    </div>
+
+    <div id="plantPage" class="page hidden forest-page">
+      <div class="top-row">
+        <div class="circle-icon" onclick="showGreenPage()">←</div>
+        <div class="top-title">Миний ой</div>
+        <div class="circle-icon">🌿</div>
+      </div>
+
+      <div class="glass-card dashboard-card">
+        <h3>Тарьсан модны тойм</h3>
+
+        <div class="dashboard-grid">
+          <div class="dashboard-box">
+            <div class="dashboard-number" id="dashboardTotalTrees">0</div>
+            <div class="dashboard-label">Нийт тарьсан мод</div>
+          </div>
+
+          <div class="dashboard-box">
+            <div class="dashboard-number" id="dashboardEcoPoint">0</div>
+            <div class="dashboard-label">Eco оноо</div>
+          </div>
+
+          <div class="dashboard-box">
+            <div class="dashboard-number" id="dashboardCO2">0</div>
+            <div class="dashboard-label">CO₂ нөлөө</div>
+          </div>
+
+          <div class="dashboard-box">
+            <div class="dashboard-number" id="dashboardLevel">1</div>
+            <div class="dashboard-label">Түвшин</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card forest-hero">
+        <h2>Сонгон тарьж болох мод</h2>
+        <p>
+          Ногоон оноогоороо мод сонгож, Монголын виртуал газрын зураг дээр тэмдэглэнэ.
+        </p>
+
+        <div id="selectedTreeEmoji" class="main-tree">🌲</div>
+
+        <div class="tree-status">
+          <h3 id="selectedTreeName">Шинэс</h3>
+          <p id="selectedTreeText">Сэрүүн бүсэд тэсвэртэй, эхний сонголтод тохиромжтой.</p>
+          <p id="selectedTreePrice" class="price-label">Үнэ: 20 eco оноо</p>
+        </div>
+
+        <div class="action-row">
+          <button class="white-btn" onclick="plantSelectedTree()">Тарьж эхлэх</button>
+          <button class="outline-btn" onclick="shareForest()">Хуваалцах</button>
+        </div>
+      </div>
+
+      <div class="section-title">Модны төрөл</div>
+      <div class="tree-list">
+        <div class="tree-option active" onclick="selectTree(this, 'Шинэс','🌲','Сэрүүн бүсэд тэсвэртэй, эхний сонголтод тохиромжтой.', 20)">
+          <div class="emoji">🌲</div>
+          <div class="name">Шинэс</div>
+          <div class="price">20 eco оноо</div>
+          <div class="desc">Уур амьсгалд тэсвэртэй, ойжуулалтад түгээмэл.</div>
+        </div>
+
+        <div class="tree-option" onclick="selectTree(this, 'Хайлаас','🌳','Тоос шороо шүүх чадвар сайтай мод.', 30)">
+          <div class="emoji">🌳</div>
+          <div class="name">Хайлаас</div>
+          <div class="price">30 eco оноо</div>
+          <div class="desc">Хот орчинд тохиромжтой, агаар цэвэршүүлэхэд тустай.</div>
+        </div>
+
+        <div class="tree-option" onclick="selectTree(this, 'Улиас','🌿','Хурдан ургалттай, ногоон бүсэд тохиромжтой.', 25)">
+          <div class="emoji">🌿</div>
+          <div class="name">Улиас</div>
+          <div class="price">25 eco оноо</div>
+          <div class="desc">Хурдан ургадаг, залуу хэрэглэгчдэд сонирхолтой.</div>
+        </div>
+
+        <div class="tree-option" onclick="selectTree(this, 'Бургас','🌴','Усархаг орчинд ургах чадвартай мод.', 35)">
+          <div class="emoji">🌴</div>
+          <div class="name">Бургас</div>
+          <div class="price">35 eco оноо</div>
+          <div class="desc">Чийглэг орчинд тохиромжтой, өвөрмөц хэлбэртэй.</div>
+        </div>
+
+        <div class="tree-option" onclick="selectTree(this, 'Сакура','🌸','Гоёлын өнгө үзэмжтэй мод.', 40)">
+          <div class="emoji">🌸</div>
+          <div class="name">Сакура</div>
+          <div class="price">40 eco оноо</div>
+          <div class="desc">Харагдах байдлыг илүү гоё болгоно.</div>
+        </div>
+      </div>
+
+      <div class="glass-card reward-card">
+        <div class="map-header-row">
+          <div class="map-title-block">
+            <h3>МОДНЫ ТОО</h3>
+            <p>Таны тарьсан моднууд Монголын зураг дээр хадгалагдана</p>
+          </div>
+          <button class="dashboard-link-btn" onclick="showScenePage()">Тарьсан мод харах дашбоард</button>
+        </div>
+
+        <div class="mongolia-wrap">
+          <div id="mongoliaMap" class="mongolia-map real-map">
+            <img src="mongolia-map.jpg" class="map-shape" alt="Монгол газрын зураг">
+            <div id="mapTreesLayer" class="map-trees-layer"></div>
+          </div>
+        </div>
+
+        <div class="map-label">Тарьсан мод бүр газрын зураг дээр ногоон цэг болж үлдэнэ</div>
+
+        <div class="reward-stats">
+          <div>Түвшин: <span id="forestLevel">1</span></div>
+          <div>CO₂ нөлөө: <span id="co2Text">0</span> кг</div>
+        </div>
+
+        <div class="plant-summary">
+          <div class="mini-stat">
+            <div class="big" id="miniTreeCount">0</div>
+            <div>Нийт мод</div>
+          </div>
+          <div class="mini-stat">
+            <div class="big" id="miniBadgeCount">1</div>
+            <div>Badge</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="scenePage" class="page hidden scene-page">
+      <div class="top-row">
+        <div class="circle-icon" onclick="showPlantPage()">←</div>
+        <div class="top-title">Улаанбаатар виртуал орчин</div>
+        <div class="circle-icon">🌿</div>
+      </div>
+
+      <div class="scene-card">
+        <div class="scene-title">🌳 Миний тарьсан мод</div>
+        <div class="scene-sub">
+          Таны сонгосон <span id="sceneTreeName">Шинэс</span> мод Улаанбаатарын виртуал ногоон орчинд амжилттай таригдлаа.
+        </div>
+        <div id="sceneStatus" class="scene-badge">Мод амжилттай таригдлаа</div>
+      </div>
+    </div>
+
+    <div id="surveyPage" class="page hidden survey-page">
+      <div class="green-header">
+        <h2>📋 Судалгаа</h2>
+        <p>Санал асуулгад оролцоно уу</p>
+      </div>
+
+      <div class="survey-wrap">
+        <div class="survey-link-card">
+          <h3>Ногоон цэсийн судалгаа</h3>
+          <p>Доорх товчийг дарж Google Form руу орон асуулга бөглөнө үү.</p>
+
+          <a
+            class="link-btn survey-link-btn"
+            href="https://forms.gle/EiGzhRXZKXBn91ZK8"
+            target="_blank"
+          >
+            Асуулга нээх
+          </a>
+
+          <p class="survey-note">
+            Судалгааны холбоос шинэ tab дээр нээгдэнэ.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <div class="nav-btn" onclick="showHomePage()">🏠</div>
+      <div class="green-nav-btn" onclick="showGreenPage()">🌱</div>
+      <div class="plus" onclick="showSurveyPage()">+</div>
+      <div class="nav-btn" onclick="showPlantPage()">🌳</div>
+    </div>
+  </div>
+
+  <script>
+    let point = Number(localStorage.getItem("point")) || 0;
+    let actions = Number(localStorage.getItem("actions")) || 0;
+    let treeCount = Number(localStorage.getItem("treeCount")) || 0;
+    let stepCount = Number(localStorage.getItem("stepCount")) || 0;
+    let productCount = Number(localStorage.getItem("productCount")) || 0;
+    let plantedTrees = JSON.parse(localStorage.getItem("plantedTrees")) || [];
+
+    let currentTreeName = "Шинэс";
+    let currentTreeEmoji = "🌲";
+    let currentTreeText = "Сэрүүн бүсэд тэсвэртэй, эхний сонголтод тохиромжтой.";
+    let currentTreePrice = 20;
+
+    const mongoliaPositions = [
+      { left: 10, top: 45 },
+      { left: 18, top: 38 },
+      { left: 28, top: 35 },
+      { left: 38, top: 33 },
+      { left: 48, top: 40 },
+      { left: 58, top: 36 },
+      { left: 68, top: 34 },
+      { left: 78, top: 39 },
+      { left: 88, top: 45 },
+      { left: 76, top: 52 },
+      { left: 63, top: 58 },
+      { left: 50, top: 61 },
+      { left: 38, top: 58 },
+      { left: 26, top: 55 }
+    ];
+
+    function saveData() {
+      localStorage.setItem("point", point);
+      localStorage.setItem("actions", actions);
+      localStorage.setItem("treeCount", treeCount);
+      localStorage.setItem("stepCount", stepCount);
+      localStorage.setItem("productCount", productCount);
+      localStorage.setItem("plantedTrees", JSON.stringify(plantedTrees));
+    }
+
+    function hideAllPages() {
+      document.getElementById("homePage").classList.add("hidden");
+      document.getElementById("greenPage").classList.add("hidden");
+      document.getElementById("plantPage").classList.add("hidden");
+      document.getElementById("scenePage").classList.add("hidden");
+      document.getElementById("surveyPage").classList.add("hidden");
+    }
+
+    function showHomePage() {
+      hideAllPages();
+      document.getElementById("homePage").classList.remove("hidden");
+    }
+
+    function showGreenPage() {
+      hideAllPages();
+      document.getElementById("greenPage").classList.remove("hidden");
+    }
+
+    function showPlantPage() {
+      hideAllPages();
+      document.getElementById("plantPage").classList.remove("hidden");
+      syncPlantPage();
+      renderMongoliaForest();
+    }
+
+    function showScenePage() {
+      hideAllPages();
+      document.getElementById("scenePage").classList.remove("hidden");
+    }
+
+    function showSurveyPage() {
+      hideAllPages();
+      document.getElementById("surveyPage").classList.remove("hidden");
+    }
+
+    function closePopup() {
+      document.getElementById("welcomePopup").classList.add("hidden");
+      showHomePage();
+    }
+
+    function updatePopupText() {
+      const remain = Math.max(0, 100 - point);
+      document.getElementById("popupText").innerText =
+        `Та одоогоор 100 eco онооноос ${remain} оноо дутуу байна. Баримтаа бүртгүүлж, ногоон оноо цуглуулаарай.`;
+    }
+
+    function addPoint(type = "step") {
+      if (type === "product") {
+        point += 15;
+        productCount += 1;
+      } else {
+        point += 10;
+        stepCount += 1;
+      }
+
+      actions += 1;
+      saveData();
+      updateAllUI();
+    }
+
+    function updateTree() {
+      const treeStage = document.getElementById("treeStage");
+      const treeText = document.getElementById("treeText");
+
+      if (!treeStage || !treeText) return;
+
+      if (point >= 100) {
+        treeStage.innerText = "🌳";
+        treeText.innerText = "Мод бүрэн ургасан";
+      } else if (point >= 60) {
+        treeStage.innerText = "🌿";
+        treeText.innerText = "Мод ургаж байна";
+      } else if (point >= 20) {
+        treeStage.innerText = "🌱";
+        treeText.innerText = "Соёолж эхэлсэн";
+      } else {
+        treeStage.innerText = "🫘";
+        treeText.innerText = "Үр суулгасан";
+      }
+    }
+
+    function updateBadges() {
+      const badgeList = document.getElementById("badgeList");
+      let badges = '<span class="badge">Эхлэл</span>';
+      let count = 1;
+
+      if (actions >= 3) {
+        badges += '<span class="badge">Анхны алхам</span>';
+        count++;
+      }
+      if (point >= 60) {
+        badges += '<span class="badge">Ногоон оролцогч</span>';
+        count++;
+      }
+      if (treeCount >= 1) {
+        badges += '<span class="badge">Мод бүтээгч</span>';
+        count++;
+      }
+      if (treeCount >= 3) {
+        badges += '<span class="badge">Ногоон баатар</span>';
+        count++;
+      }
+
+      badgeList.innerHTML = badges;
+      document.getElementById("miniBadgeCount").innerText = count;
+    }
+
+    function updateProgress() {
+      const percent = Math.min(point, 100);
+      document.getElementById("progressFill").style.width = percent + "%";
+      document.getElementById("progressText").innerText = percent + " / 100";
+    }
+
+    function updateStats() {
+      document.getElementById("pointHome").innerText = "Оноо: " + point;
+      document.getElementById("pointGreen").innerText = point;
+      document.getElementById("actionCount").innerText = actions;
+      document.getElementById("stepCount").innerText = stepCount;
+      document.getElementById("productCount").innerText = productCount;
+      document.getElementById("treeCount").innerText = treeCount;
+      document.getElementById("miniTreeCount").innerText = treeCount;
+      document.getElementById("billionTreeCount").innerText = treeCount;
+      document.getElementById("dashboardTotalTrees").innerText = treeCount;
+      document.getElementById("dashboardEcoPoint").innerText = point;
+      document.getElementById("dashboardCO2").innerText = treeCount * 25;
+      document.getElementById("dashboardLevel").innerText = Math.max(1, Math.floor(treeCount / 2) + 1);
+    }
+
+    function syncPlantPage() {
+      document.getElementById("forestLevel").innerText = Math.max(1, Math.floor(treeCount / 2) + 1);
+      document.getElementById("co2Text").innerText = treeCount * 25;
+      document.getElementById("miniTreeCount").innerText = treeCount;
+      document.getElementById("billionTreeCount").innerText = treeCount;
+    }
+
+    function updateAllUI() {
+      updateStats();
+      updateProgress();
+      updateTree();
+      updateBadges();
+      syncPlantPage();
+      updatePopupText();
+      renderMongoliaForest();
+    }
+
+    function selectTree(el, name, emoji, text, price) {
+      currentTreeName = name;
+      currentTreeEmoji = emoji;
+      currentTreeText = text;
+      currentTreePrice = price;
+
+      document.getElementById("selectedTreeName").innerText = name;
+      document.getElementById("selectedTreeEmoji").innerText = emoji;
+      document.getElementById("selectedTreeText").innerText = text;
+      document.getElementById("selectedTreePrice").innerText = "Үнэ: " + price + " eco оноо";
+
+      document.querySelectorAll(".tree-option").forEach(item => item.classList.remove("active"));
+      el.classList.add("active");
+    }
+
+    function addTreeData() {
+      const pos = mongoliaPositions[plantedTrees.length % mongoliaPositions.length];
+
+      plantedTrees.push({
+        left: pos.left,
+        top: pos.top
+      });
+
+      treeCount = plantedTrees.length;
+      saveData();
+    }
+
+    function plantSelectedTree() {
+      if (point < currentTreePrice) {
+        alert("Энэ модыг тарихын тулд " + currentTreePrice + " eco оноо хэрэгтэй.");
+        return;
+      }
+
+      point -= currentTreePrice;
+      addTreeData();
+      updateAllUI();
+      startPlantingScene();
+    }
+
+    function renderMongoliaForest() {
+      const layer = document.getElementById("mapTreesLayer");
+      if (!layer) return;
+
+      layer.innerHTML = "";
+
+      plantedTrees.forEach(tree => {
+        const el = document.createElement("div");
+        el.className = "map-tree";
+        el.style.left = tree.left + "%";
+        el.style.top = tree.top + "%";
+        layer.appendChild(el);
+      });
+    }
+
+    function startPlantingScene() {
+      document.getElementById("sceneTreeName").innerText = currentTreeName;
+      document.getElementById("sceneStatus").innerText = currentTreeName + " Улаанбаатарын виртуал орчинд амжилттай таригдлаа";
+      showScenePage();
+    }
+
+    function shareForest() {
+      alert("Найзууддаа хуваалцах функц дараагийн хувилбарт нэмэгдэнэ.");
+    }
+
+    updateAllUI();
+  </script>
+</body>
+</html>
